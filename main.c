@@ -5,27 +5,27 @@ int main() {
     struct PCB firstElement = head(queue);
     struct PCB lastElement = tail(queue);
 
-    printf("INITIAL QUEUE");
-    printf("%i", firstElement.processID);
-    printf("%i", lastElement.processID);
+    printf("INITIAL QUEUE, each Process ID correlates to the PCB name.\n");
+    printf("Process ID: %i\n", firstElement.processID);
+    printf("Process ID: %i\n", lastElement.processID);
 
     struct PCB PCB7 = dequeue(queue);
     struct PCB PCB2 = dequeue(queue);
     struct PCB PCB4 = createPCB(4, 3, 2, "READY");
     struct PCB PCB9 = createPCB(9, 8, 7, "WAITING");
 
-    printf("QUEUE AFTER INSERTING NEW PCB 4 & 9");
+    printf("QUEUE AFTER INSERTING NEW PCB 4 & 9\n");
     enqueue(queue, PCB4);
-    printf("%i", tail(queue).processID);
+    printf("Process ID: %i\n", tail(queue).processID);
     enqueue(queue, PCB7);
-    printf("%i",tail(queue).processID);
+    printf("Process ID: %i\n",tail(queue).processID);
     enqueue(queue, PCB2);
-    printf("%i",tail(queue).processID);
+    printf("Process ID: %i\n",tail(queue).processID);
     enqueue(queue, PCB9);
-    printf("%i",tail(queue).processID);
+    printf("Process ID: %i",tail(queue).processID);
 
     free(queue);
-    
+
     return 0;
 }
 
