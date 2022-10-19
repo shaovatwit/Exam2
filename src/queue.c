@@ -6,8 +6,8 @@ int main() {
     struct PCB lastElement = tail(queue);
 
     printf("INITIAL QUEUE, each Process ID correlates to the PCB name.\n");
-    printf("PCB2- Process ID: %i\n PID: %i\n State: %s\n Registers: %i\n", firstElement.processID, firstElement.pid, firstElement.state, firstElement.registers);
-    printf("PCB7- Process ID: %i\n PID: %i\n State: %s\n Registers: %i\n", lastElement.processID, lastElement.pid, lastElement.state, lastElement.registers);
+    printf("PCB7-\n Process ID: %i\n PID: %i\n State: %s\n Registers: %i\n", firstElement.processID, firstElement.pid, firstElement.state, firstElement.registers);
+    printf("PCB2-\n Process ID: %i\n PID: %i\n State: %s\n Registers: %i\n", lastElement.processID, lastElement.pid, lastElement.state, lastElement.registers);
 
     struct PCB PCB7 = dequeue(queue);
     struct PCB PCB2 = dequeue(queue);
