@@ -6,8 +6,8 @@ int main() {
     struct PCB lastElement = tail(queue);
 
     printf("INITIAL QUEUE, each Process ID correlates to the PCB name.\n");
-    printf("Process ID: %i\n", firstElement.processID);
-    printf("Process ID: %i\n", lastElement.processID);
+    printf("PCB2- Process ID: %i\n PID: %i\n State: %s\n Registers: %i\n", firstElement.processID, firstElement.pid, firstElement.state, firstElement.registers);
+    printf("PCB7- Process ID: %i\n PID: %i\n State: %s\n Registers: %i\n", lastElement.processID, lastElement.pid, lastElement.state, lastElement.registers);
 
     struct PCB PCB7 = dequeue(queue);
     struct PCB PCB2 = dequeue(queue);
@@ -16,13 +16,13 @@ int main() {
 
     printf("QUEUE AFTER INSERTING NEW PCB 4 & 9\n");
     enqueue(queue, PCB4);
-    printf("Process ID: %i\n", tail(queue).processID);
+    printf("PCB4-\n Process ID: %i\n PID: %i\n State: %s\n Registers: %i\n", tail(queue).processID, tail(queue).pid, tail(queue).state, tail(queue).registers);
     enqueue(queue, PCB7);
-    printf("Process ID: %i\n",tail(queue).processID);
+    printf("PCB7-\n Process ID: %i\n PID: %i\n State: %s\n Registers: %i\n", tail(queue).processID, tail(queue).pid, tail(queue).state, tail(queue).registers);
     enqueue(queue, PCB2);
-    printf("Process ID: %i\n",tail(queue).processID);
+    printf("PCB2-\n Process ID: %i\n PID: %i\n State: %s\n Registers: %i\n", tail(queue).processID, tail(queue).pid, tail(queue).state, tail(queue).registers);
     enqueue(queue, PCB9);
-    printf("Process ID: %i",tail(queue).processID);
+    printf("Process ID: %i\n PID: %i\n State: %s\n Registers: %i\n", tail(queue).processID, tail(queue).pid, tail(queue).state, tail(queue).registers);
 
     free(queue);
 

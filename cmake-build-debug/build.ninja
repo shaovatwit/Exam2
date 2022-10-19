@@ -49,11 +49,17 @@ cmake_ninja_workdir = C$:/Users/shaov/CLionProjects/Exam2/cmake-build-debug/
 
 build cmake_object_order_depends_target_Exam2: phony || CMakeFiles/Exam2.dir
 
-build CMakeFiles/Exam2.dir/main.c.obj: C_COMPILER__Exam2_Debug C$:/Users/shaov/CLionProjects/Exam2/main.c || cmake_object_order_depends_target_Exam2
-  DEP_FILE = CMakeFiles\Exam2.dir\main.c.obj.d
+build CMakeFiles/Exam2.dir/src/queue.c.obj: C_COMPILER__Exam2_Debug C$:/Users/shaov/CLionProjects/Exam2/src/queue.c || cmake_object_order_depends_target_Exam2
+  DEP_FILE = CMakeFiles\Exam2.dir\src\queue.c.obj.d
   FLAGS = -g -std=gnu99
   OBJECT_DIR = CMakeFiles\Exam2.dir
-  OBJECT_FILE_DIR = CMakeFiles\Exam2.dir
+  OBJECT_FILE_DIR = CMakeFiles\Exam2.dir\src
+
+build CMakeFiles/Exam2.dir/src/shell.c.obj: C_COMPILER__Exam2_Debug C$:/Users/shaov/CLionProjects/Exam2/src/shell.c || cmake_object_order_depends_target_Exam2
+  DEP_FILE = CMakeFiles\Exam2.dir\src\shell.c.obj.d
+  FLAGS = -g -std=gnu99
+  OBJECT_DIR = CMakeFiles\Exam2.dir
+  OBJECT_FILE_DIR = CMakeFiles\Exam2.dir\src
 
 
 # =============================================================================
@@ -63,7 +69,7 @@ build CMakeFiles/Exam2.dir/main.c.obj: C_COMPILER__Exam2_Debug C$:/Users/shaov/C
 #############################################
 # Link the executable Exam2.exe
 
-build Exam2.exe: C_EXECUTABLE_LINKER__Exam2_Debug CMakeFiles/Exam2.dir/main.c.obj
+build Exam2.exe: C_EXECUTABLE_LINKER__Exam2_Debug CMakeFiles/Exam2.dir/src/queue.c.obj CMakeFiles/Exam2.dir/src/shell.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Exam2.dir
