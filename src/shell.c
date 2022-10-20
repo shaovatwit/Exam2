@@ -8,27 +8,42 @@
 //
 // Created by shaov on 10/17/2022.
 //
-int main (int argc, char* argv[]) {
-    printf("$ ");
-    if (argc != 1) {
-        printf("USAGE: \nPROGRAM TO RUN.");
+int main () {
+    int argc = 15; //Max amount of arguments.
+    char* argv[argc];
+    char* args[argc+1]; //Setting up another array +1 to account for NULL
+    printf(": ");
+    for (int i = 0; i < argc; i++) {
+
+    }
+    if (argc < 1) { //If argc is 0.
+        printf("USAGE:\n  CMD ARGS");
         exit(1);
+    }
+
+    args[argc] = NULL; //Sets last index of args to NULL
+    const char* cmd = argv[1]; //Sets cmd to the second index of argv. First index is ./program
+
+    int counter = 1;
+    while (counter < argc) { //Starts putting argv array into args, but counter starts at 1.
+        args[counter-1] = argv[counter];
+        counter++;
     }
 
     pid_t pid;
     pid = fork();
+    int status;
 
     if (pid < 0) {
         perror("Failed to fork.");
     }
-    //Loop over the argv and then fill in the args with the args.
     else if (pid == 0) {
-        char* firstArgv[] = { argv[0] };
-//        char* args = malloc(argc * sizeof(char));
-        for (int i = 1; i < argc; i++) {
-            argv[i-1] = argv[i];
-        }
-        execvp((const char *) firstArgv, argv);
+        execvp(cmd, args);
+    }
+
+    waitpid(pid, &status, 0); //Waits for the child process(es) to finish.
+    if (WIFEXITED(status)) {
+        printf("Program finished.");
     }
 
     return 0;

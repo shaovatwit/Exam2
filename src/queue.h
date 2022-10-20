@@ -2,7 +2,7 @@
 // Created by shaov on 10/17/2022.
 //
 
-#include <malloc.h>
+//#include <malloc.h>
 
 #ifndef EXAM2_QUEUE_H
 #define EXAM2_QUEUE_H
