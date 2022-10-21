@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <assert.h>
 
-char** str_split(char* a_str, const char a_delim){
+char** str_split(char* a_str, const char a_delim){ //Splits user input into args to be able to execute.
     char** result = 0;
     size_t count = 0;
     char* tmp = a_str;
@@ -46,13 +46,13 @@ char** str_split(char* a_str, const char a_delim){
 }
 
 int main() {
-    for(;;) {
+    for(;;) { //Loop until exit.
         printf("\n$");
         char inputArgs[500];
-        scanf(" %499[^\n]s", inputArgs);
+        scanf(" %499[^\n]s", inputArgs); //Waits before asking next argument.
         char **argsv = str_split(inputArgs, ' ');
         if (argsv) {
-            if(strcmp(argsv[0], "exit") == 0) {
+            if(strcmp(argsv[0], "exit") == 0) { //If exit is called, break the loop and exit.
                 break;
             }
             int status;
@@ -61,12 +61,12 @@ int main() {
                 perror("Fork failed.");
                 return 1;
             } else if (pid == 0) {
-                if (execvp(argsv[0], argsv) < 0) {
+                if (execvp(argsv[0], argsv) < 0) { //Checks return value of exec.
                     perror("Incorrect execv.");
                     exit(1);
                 }
                 else {
-                    printf("%d", execvp(argsv[0], argsv));
+                    printf("%d", execvp(argsv[0], argsv)); //Executes the given command.
                     exit(0);
                 }
             }
