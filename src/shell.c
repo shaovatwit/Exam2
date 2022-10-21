@@ -3,48 +3,80 @@
 #include <stdbool.h>
 #include <string.h>
 #include <unistd.h>
-#include <sys/wait.h>
+#include <assert.h>
 
-//
-// Created by shaov on 10/17/2022.
-//
-int main () {
-    int argc = 15; //Max amount of arguments.
-    char* argv[argc];
-    char* args[argc+1]; //Setting up another array +1 to account for NULL
-    printf(": ");
-    for (int i = 0; i < argc; i++) {
+char** str_split(char* a_str, const char a_delim){
+    char** result = 0;
+    size_t count = 0;
+    char* tmp = a_str;
+    char* last_comma = 0;
+    char delim[2];
+    delim[0] = a_delim;
+    delim[1] = 0;
 
+    while (*tmp){
+        if (a_delim == *tmp){
+            count++;
+            last_comma = tmp;
+        }
+        tmp++;
     }
-    if (argc < 1) { //If argc is 0.
-        printf("USAGE:\n  CMD ARGS");
-        exit(1);
+    count += last_comma < (a_str + strlen(a_str) - 1);
+
+    count++;
+
+    result = malloc(sizeof(char*) * count);
+
+    if (result){
+        size_t i  = 0;
+        char* token = strtok(a_str, delim);
+
+        while (token) {
+            assert(i < count);
+            *(result + i++) = strdup(token);
+            token = strtok(0, delim);
+        }
+        if (i != count - 1) {
+            printf("USAGE:\n  CMD ARGS");
+            return NULL;
+        }
+        *(result + i) = 0;
+    }
+    return result;
+}
+
+int main() {
+    for(;;) {
+        printf("$");
+        char inputArgs[500];
+        scanf(" %499[^\n]s", inputArgs);
+        char **argsv = str_split(inputArgs, ' ');
+        if (argsv) {
+            int argsc = 0;
+            for (int i = 0; *(argsv + i); i++) {
+                argsc++;
+            }
+            if(strcmp(argsv[0], "exit") == 0) {
+                break;
+            }
+            int status;
+            pid_t pid = fork();
+            if (pid < 0) {
+                perror("Fork failed.");
+                return 1;
+            } else if (pid == 0) {
+                if (execvp(argsv[0], argsv) < 0) {
+                    perror("Incorrect execv.");
+                    exit(1);
+                }
+                else {
+                    printf("%d", execvp(argsv[0], argsv));
+                    exit(0);
+                }
+            }
+            waitpid(pid, &status, 0);
+            free(argsv);
+        }
     }
 
-    args[argc] = NULL; //Sets last index of args to NULL
-    const char* cmd = argv[1]; //Sets cmd to the second index of argv. First index is ./program
-
-    int counter = 1;
-    while (counter < argc) { //Starts putting argv array into args, but counter starts at 1.
-        args[counter-1] = argv[counter];
-        counter++;
-    }
-
-    pid_t pid;
-    pid = fork();
-    int status;
-
-    if (pid < 0) {
-        perror("Failed to fork.");
-    }
-    else if (pid == 0) {
-        execvp(cmd, args);
-    }
-
-    waitpid(pid, &status, 0); //Waits for the child process(es) to finish.
-    if (WIFEXITED(status)) {
-        printf("Program finished.");
-    }
-
-    return 0;
 }
