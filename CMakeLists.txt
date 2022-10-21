@@ -3,4 +3,5 @@ project(Exam2 C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(Exam2 src/queue.c src/queue.h src/shell.c src/shell.h)
+add_executable(queue src/queue.c src/queue.h)
+add_executable(shell src/shell.c src/shell.h)
