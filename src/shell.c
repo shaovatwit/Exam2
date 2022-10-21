@@ -52,10 +52,6 @@ int main() {
         scanf(" %499[^\n]s", inputArgs);
         char **argsv = str_split(inputArgs, ' ');
         if (argsv) {
-            int argsc = 0;
-            for (int i = 0; *(argsv + i); i++) {
-                argsc++;
-            }
             if(strcmp(argsv[0], "exit") == 0) {
                 break;
             }
