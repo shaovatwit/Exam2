@@ -29,12 +29,12 @@ char** str_split(char* a_str, const char a_delim){
 
     if (result){
         size_t i  = 0;
-        char* token = strtok(a_str, delim);
+        char* split = strtok(a_str, delim);
 
-        while (token) {
+        while (split) {
             assert(i < count);
-            *(result + i++) = strdup(token);
-            token = strtok(0, delim);
+            *(result + i++) = strdup(split);
+            split = strtok(0, delim);
         }
         if (i != count - 1) {
             printf("USAGE:\n  CMD ARGS");
@@ -47,7 +47,7 @@ char** str_split(char* a_str, const char a_delim){
 
 int main() {
     for(;;) {
-        printf("$");
+        printf("\n$");
         char inputArgs[500];
         scanf(" %499[^\n]s", inputArgs);
         char **argsv = str_split(inputArgs, ' ');
